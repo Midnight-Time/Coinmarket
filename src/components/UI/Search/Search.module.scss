@@ -1,0 +1,14 @@
+@import "../../../Styles/Variables.scss";
+
+.searchField {
+  margin-top: 13rem;
+  margin-bottom: 2rem;
+  height: 4rem;
+  background-color: $color-grey-light;
+  max-width: 30rem;
+  color: $color-white;
+  display: flex;
+  align-items: center;
+  padding: 1rem 3rem;
+  border-radius: 3px;
+}

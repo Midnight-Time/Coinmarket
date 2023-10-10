@@ -1,0 +1,8 @@
+@import "../../../Styles/Variables.scss";
+
+.button {
+  border: none;
+  cursor: pointer;
+  background-color: $color-accent;
+  color: $color-white;
+}

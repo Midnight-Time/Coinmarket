@@ -1,9 +1,22 @@
+// import { useEffect } from "react";
 import "./App.scss";
-import "./components/Header/Header";
-import Header from "./components/Header/Header";
+import HomePage from "./pages/HomePage";
 
 function App() {
-  return <Header />;
+  // useEffect(() => {
+  //   const fetchCoins = async () => {
+  //     const res = await fetch("https://api.coincap.io/v2/assets?limit=20");
+  //     const data = await res.json();
+  //     console.log(data);
+  //   };
+  //   fetchCoins();
+  // });
+
+  return (
+    <div className="app">
+      <HomePage />
+    </div>
+  );
 }
 
 export default App;

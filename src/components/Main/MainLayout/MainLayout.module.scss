@@ -1,0 +1,17 @@
+@import "../../../Styles/Variables.scss";
+
+.main {
+  grid-column: center-start / center-end;
+
+  h1 {
+    font-size: 6rem;
+    text-transform: uppercase;
+  }
+}
+
+.hero {
+  margin-top: 5rem;
+  display: flex;
+  justify-content: space-between;
+  min-height: 13rem;
+}

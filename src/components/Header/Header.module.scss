@@ -1,3 +1,28 @@
+@import "../../Styles/Variables.scss";
+
 .header {
-  color: red;
+  grid-column: center-start / center-end;
+  margin-top: 1rem;
+  padding: 2rem;
+  background-color: $color-white;
+  height: min-content;
+  box-shadow: $shadow-light;
+  border-radius: 3px;
+
+  ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 10rem;
+
+    li {
+      color: $color-grey-dark;
+
+      // .currencyName {
+      // }
+
+      // .currencyValue {
+      // }
+    }
+  }
 }

@@ -1,0 +1,20 @@
+@import "../../../../Styles/Variables.scss";
+
+.tableRow {
+  div {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
+  .btn {
+    padding: 1rem 2rem;
+    min-width: 30%;
+    border-radius: 3px;
+  }
+}
+.priceDown {
+  color: $color-red;
+}
+.priceUp {
+  color: $color-green;
+}

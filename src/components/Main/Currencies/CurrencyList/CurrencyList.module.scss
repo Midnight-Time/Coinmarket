@@ -1,0 +1,47 @@
+@import "../../../../Styles/Variables.scss";
+
+.table {
+  border-collapse: collapse;
+  border-top: 1px solid #dfdfdf;
+  border-bottom: 1px solid #dfdfdf;
+
+  td,
+  th {
+    border-top: 1px solid #dfdfdf;
+  }
+
+  thead {
+    height: 5rem;
+    font-size: 1.6rem;
+
+    th {
+      &:nth-child(1) {
+        min-width: 30rem;
+      }
+      &:nth-child(2) {
+        min-width: 15rem;
+      }
+      &:nth-child(3) {
+        min-width: 20rem;
+      }
+      &:nth-child(4) {
+        min-width: 10rem;
+      }
+      &:nth-child(5) {
+        width: 100%;
+      }
+    }
+  }
+
+  tbody {
+    font-size: 2rem;
+    tr {
+      height: 8rem;
+    }
+
+    td {
+      vertical-align: middle;
+      text-align: center;
+    }
+  }
+}
