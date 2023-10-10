@@ -1,27 +1,49 @@
 import classes from "./CurrencyItem.module.scss";
 ///
 import Button from "../../../UI/Button/Button";
+///
+import React from "react";
+import coinData from "../../../../models/coinData";
+///
 
-const CurrencyItem = () => {
+const CurrencyItem: React.FC<{ item: coinData }> = (props) => {
+  const formatPrice = (num: number) => {
+    const convertNum = new Intl.NumberFormat("en-EN", {
+      style: "currency",
+      currency: "USD",
+    }).format(Number(num));
+    return convertNum;
+  };
+
+  const formatProcent = (num: number) => {
+    return num.toFixed(2);
+  };
+
+  const formatMarketCap = (num: number) => {
+    const cutDecimals = Math.round(num);
+    const convertNum = new Intl.NumberFormat("en-EN").format(cutDecimals);
+    return convertNum;
+  };
+
   return (
     <tr className={classes.tableRow}>
       <th>
         <div>
-          <span>Bitcoin</span>
-          <span>BTC</span>
+          <span>{props.item.id}</span>
+          <span>{props.item.symbol}</span>
         </div>
       </th>
       <td>
-        <div>$27,693.88</div>
+        <div>{formatPrice(props.item.priceUsd)}</div>
       </td>
       <td>
         <div className={classes.priceDown}>
           <span>&#9660;</span>
-          <span> 0.69%</span>
+          <span>{formatProcent(props.item.changePercent24Hr)}%</span>
         </div>
       </td>
       <td>
-        <div className={classes.reflectCahnges}>$540,288,988,422</div>
+        <div>${formatMarketCap(props.item.marketCapUsd)}</div>
       </td>
       <td>
         <div>
