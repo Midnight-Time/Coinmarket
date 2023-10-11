@@ -16,9 +16,9 @@ class coinData {
   ) {
     this.id = coinId;
     this.name = coinName;
-    this.priceUsd = -coinPrice;
-    this.changePercent24Hr = -percent;
-    this.marketCapUsd = -marketCap;
+    this.priceUsd = Number(coinPrice);
+    this.changePercent24Hr = Number(percent);
+    this.marketCapUsd = Number(marketCap);
     this.symbol = symbol;
   }
 }

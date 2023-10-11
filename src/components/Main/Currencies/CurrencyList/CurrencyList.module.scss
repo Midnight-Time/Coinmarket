@@ -4,6 +4,7 @@
   border-collapse: collapse;
   border-top: 1px solid #dfdfdf;
   border-bottom: 1px solid #dfdfdf;
+  cursor: pointer;
 
   td,
   th {
@@ -20,12 +21,24 @@
       }
       &:nth-child(2) {
         min-width: 15rem;
+        transition: all 0.3s;
+        &:hover {
+          background-color: $color-accent-light;
+        }
       }
       &:nth-child(3) {
         min-width: 20rem;
+        transition: all 0.3s;
+        &:hover {
+          background-color: $color-accent-light;
+        }
       }
       &:nth-child(4) {
         min-width: 10rem;
+        transition: all 0.3s;
+        &:hover {
+          background-color: $color-accent-light;
+        }
       }
       &:nth-child(5) {
         width: 100%;
@@ -44,4 +57,25 @@
       text-align: center;
     }
   }
+}
+.sortBtn {
+  background-color: transparent;
+  border: none;
+  padding: 0.5rem 1rem;
+  line-height: 1;
+  font-size: 1.4rem;
+  color: $color-black;
+  cursor: pointer;
+
+  transition: transform 0.05s ease-out;
+}
+.sortBtnReversed {
+  background-color: transparent;
+  border: none;
+  padding: 0.5rem 1rem;
+  line-height: 1;
+  font-size: 1.4rem;
+  color: $color-black;
+  cursor: pointer;
+  transform: rotate(180deg);
 }
