@@ -37,8 +37,19 @@ const CurrencyItem: React.FC<{ item: coinData }> = (props) => {
         <div>{formatPrice(props.item.priceUsd)}</div>
       </td>
       <td>
-        <div className={classes.priceDown}>
-          <span>&#9660;</span>
+        <div
+          className={`${
+            props.item.changePercent24Hr > 0
+              ? classes.priceUp
+              : classes.priceDown
+          }`}
+        >
+          {props.item.changePercent24Hr > 0 ? (
+            <span>&#9650;</span>
+          ) : (
+            <span>&#9660;</span>
+          )}
+
           <span>{formatProcent(props.item.changePercent24Hr)}%</span>
         </div>
       </td>

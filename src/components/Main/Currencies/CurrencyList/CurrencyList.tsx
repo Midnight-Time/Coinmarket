@@ -14,7 +14,7 @@ const CurrencyList: React.FC<{ items: coinData[] }> = (props) => {
     { key: "marketCapUsd", label: "Market Cap" },
   ];
 
-  const [sortKey, setSortKey] = useState<SortKeys>("priceUsd");
+  const [sortKey, setSortKey] = useState<SortKeys>("rank");
   const [sortOrder, setSortOrder] = useState<SortOrder>("asc");
 
   type Data = typeof props.items;
@@ -76,12 +76,8 @@ const CurrencyList: React.FC<{ items: coinData[] }> = (props) => {
   }
 
   function changeSort(key: SortKeys) {
-    console.log(key);
-
     setSortOrder(sortOrder === "asc" ? "des" : "asc");
     setSortKey(key);
-
-    console.log(sortKey);
   }
 
   return (
