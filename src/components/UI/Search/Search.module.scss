@@ -1,14 +1,39 @@
 @import "../../../Styles/Variables.scss";
 
-.searchField {
+.searchEl {
   margin-top: 13rem;
   margin-bottom: 2rem;
-  height: 4rem;
-  background-color: $color-grey-light;
-  max-width: 30rem;
-  color: $color-white;
   display: flex;
   align-items: center;
-  padding: 1rem 3rem;
+  gap: 1.5rem;
+}
+
+.searchField {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  border: 1px solid $color-grey-light;
   border-radius: 3px;
+  max-width: 25rem;
+  background-color: $color-accent-light;
+  padding: 0.2rem 0.5rem;
+
+  input {
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    padding: 0.5rem;
+
+    &:focus {
+      border: none;
+      outline: $color-accent-light;
+    }
+  }
+}
+.searchBtn {
+  padding: 0.8rem 1.6rem;
+  border-radius: 3px;
+}
+.searchField.active {
+  background-color: $color-white;
 }

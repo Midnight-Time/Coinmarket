@@ -8,21 +8,33 @@ import coinData from "../../../../models/coinData";
 
 const CurrencyItem: React.FC<{ item: coinData }> = (props) => {
   const formatPrice = (num: number) => {
-    const convertNum = new Intl.NumberFormat("en-EN", {
-      style: "currency",
-      currency: "USD",
-    }).format(Number(num));
-    return convertNum;
+    if (Math.abs(num) < 0.0) {
+      return "no data";
+    } else {
+      const convertNum = new Intl.NumberFormat("en-EN", {
+        style: "currency",
+        currency: "USD",
+      }).format(Number(num));
+      return convertNum;
+    }
   };
 
   const formatProcent = (num: number) => {
-    return num.toFixed(2);
+    if (Math.abs(num) < 0.0) {
+      return "no data";
+    } else {
+      return num.toFixed(2);
+    }
   };
 
   const formatMarketCap = (num: number) => {
-    const cutDecimals = Math.round(num);
-    const convertNum = new Intl.NumberFormat("en-EN").format(cutDecimals);
-    return convertNum;
+    if (Math.abs(num) < 0.0) {
+      return "no data";
+    } else {
+      const cutDecimals = Math.round(num);
+      const convertNum = new Intl.NumberFormat("en-EN").format(cutDecimals);
+      return convertNum;
+    }
   };
 
   return (
