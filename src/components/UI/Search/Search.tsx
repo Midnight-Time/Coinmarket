@@ -6,10 +6,19 @@ import { useEffect } from "react";
 ///
 import coinData from "../../../models/coinData";
 
+type ChildProps = {
+  onSearch: (str: string) => void;
+  onFilterSearch: (filteredData: coinData[]) => void;
+  searchResults: string;
+};
+
 let isInitial = true;
 
-const Search = () => {
-  const [search, setSearch] = useState<string>("");
+const Search: React.FC<ChildProps> = ({
+  onSearch = () => {},
+  onFilterSearch = () => {},
+  searchResults,
+}) => {
   const [coins, setCoins] = useState<coinData[]>([]);
 
   useEffect(() => {
@@ -17,13 +26,15 @@ const Search = () => {
       isInitial = false;
       return;
     }
-    const fetchCoins = async () => {
-      const res = await fetch(`https://api.coincap.io/v2/assets`);
-      const data = await res.json();
-      setCoins(data.data);
-    };
-    fetchCoins();
-  }, []);
+    if (searchResults) {
+      const fetchCoins = async () => {
+        const res = await fetch(`https://api.coincap.io/v2/assets`);
+        const data = await res.json();
+        setCoins(data.data);
+      };
+      fetchCoins();
+    }
+  }, [searchResults]);
 
   const coinsData = coins.map(
     (coin: coinData) =>
@@ -38,18 +49,22 @@ const Search = () => {
       )
   );
   const filteredData = coinsData.filter((item) => {
-    return search.toLocaleLowerCase() === ""
+    return searchResults.toLocaleLowerCase() === ""
       ? item
-      : item.id.toLocaleLowerCase().includes(search);
+      : item.id.toLocaleLowerCase().includes(searchResults);
   });
-  console.log(filteredData);
+
+  const onChangeHandler = (e: React.FormEvent<HTMLInputElement>) => {
+    onSearch(e.currentTarget.value);
+    onFilterSearch(filteredData);
+  };
 
   return (
     <div className={classes.searchEl}>
       <div className={`${classes.searchField}`}>
         <span>Img</span>
         <input
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={onChangeHandler}
           type="text"
           placeholder="Search by Name..."
         />

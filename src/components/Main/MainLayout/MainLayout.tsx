@@ -16,6 +16,9 @@ let isInitial = true;
 const MainLayout = () => {
   const [coins, setCoins] = useState<coinData[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(0);
+  const [search, setSearch] = useState<string>("");
+  const [searchResults, setSearchResults] = useState<coinData[]>([]);
+  // console.log(searchResults);
 
   const moveNext = () => {
     setCurrentPage((prevPage) => prevPage + 1);
@@ -31,7 +34,6 @@ const MainLayout = () => {
 
   let offset = currentPage * 10;
 
-  // "https://api.coincap.io/v2/assets?limit=10&offset=10"
   useEffect(() => {
     if (isInitial) {
       isInitial = false;
@@ -61,6 +63,13 @@ const MainLayout = () => {
       )
   );
 
+  const setSearchData = (str: string) => {
+    setSearch(str);
+  };
+  const reseiveSearchResults = (filteredData: coinData[]) => {
+    setSearchResults(filteredData);
+  };
+
   return (
     <>
       <main className={classes.main}>
@@ -68,8 +77,17 @@ const MainLayout = () => {
           <h1>Criptomarket</h1>
           <CartPreview />
         </div>
-        <Search />
-        <CurrencyList items={coinsData} />
+        <Search
+          onSearch={setSearchData}
+          searchResults={search}
+          onFilterSearch={reseiveSearchResults}
+        />
+        {search ? (
+          <CurrencyList items={searchResults} />
+        ) : (
+          <CurrencyList items={coinsData} />
+        )}
+        {/* <CurrencyList items={coinsData} /> */}
         <Pagination
           onClickNext={moveNext}
           onClickPrev={movePrev}
