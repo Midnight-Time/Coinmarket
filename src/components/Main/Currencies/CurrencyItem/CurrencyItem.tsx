@@ -4,6 +4,8 @@ import Button from "../../../UI/Button/Button";
 ///
 import React from "react";
 import coinData from "../../../../models/coinData";
+import { ReactComponent as TriangleDown } from "../../../../assets/triangle-down.svg";
+import { ReactComponent as TriangleUp } from "../../../../assets/triangle-up.svg";
 ///
 
 const CurrencyItem: React.FC<{ item: coinData }> = (props) => {
@@ -40,9 +42,9 @@ const CurrencyItem: React.FC<{ item: coinData }> = (props) => {
   return (
     <tr className={classes.tableRow}>
       <th>
-        <div>
+        <div className={classes.nameGroup}>
           <span>{props.item.id}</span>
-          <span>{props.item.symbol}</span>
+          <span className={classes.tableRow__symbol}>{props.item.symbol}</span>
         </div>
       </th>
       <td>
@@ -57,9 +59,9 @@ const CurrencyItem: React.FC<{ item: coinData }> = (props) => {
           }`}
         >
           {props.item.changePercent24Hr > 0 ? (
-            <span>&#9650;</span>
+            <TriangleUp className={classes.triangle} />
           ) : (
-            <span>&#9660;</span>
+            <TriangleDown className={classes.triangle} />
           )}
 
           <span>{formatProcent(props.item.changePercent24Hr)}%</span>

@@ -1,6 +1,6 @@
 import classes from "./MainLayout.module.scss";
 ///
-import CartPreview from "../Cart/CartPreview/CartPreview";
+// import CartPreview from "../Cart/CartPreview/CartPreview";
 import Search from "../../UI/Search/Search";
 import CurrencyList from "../Currencies/CurrencyList/CurrencyList";
 import Pagination from "../Pagination/Pagination";
@@ -18,7 +18,6 @@ const MainLayout = () => {
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [search, setSearch] = useState<string>("");
   const [searchResults, setSearchResults] = useState<coinData[]>([]);
-  // console.log(searchResults);
 
   const moveNext = () => {
     setCurrentPage((prevPage) => prevPage + 1);
@@ -75,7 +74,7 @@ const MainLayout = () => {
       <main className={classes.main}>
         <div className={classes.hero}>
           <h1>Criptomarket</h1>
-          <CartPreview />
+          {/* <CartPreview /> */}
         </div>
         <Search
           onSearch={setSearchData}
@@ -87,7 +86,6 @@ const MainLayout = () => {
         ) : (
           <CurrencyList items={coinsData} />
         )}
-        {/* <CurrencyList items={coinsData} /> */}
         <Pagination
           onClickNext={moveNext}
           onClickPrev={movePrev}

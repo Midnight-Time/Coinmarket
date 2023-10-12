@@ -1,40 +1,44 @@
 @import "../../../../Styles/Variables.scss";
+// dfdfdf
 
 .table {
+  grid-column: center-start / center-end;
   border-collapse: collapse;
-  border-top: 1px solid #dfdfdf;
-  border-bottom: 1px solid #dfdfdf;
+  border-top: 1px solid $color-accent-light;
+  border-bottom: 1px solid $color-accent-light;
   cursor: pointer;
+  margin: 0 1rem;
 
   td,
   th {
-    border-top: 1px solid #dfdfdf;
+    border-top: 1px solid $color-accent-light;
   }
 
   thead {
     height: 5rem;
-    font-size: 1.6rem;
+    font-size: calc($default-text-size + 0.2rem);
+    color: $color-black;
 
     th {
       &:nth-child(1) {
-        min-width: 30rem;
+        min-width: 25rem;
       }
       &:nth-child(2) {
-        min-width: 15rem;
+        min-width: 18rem;
         transition: all 0.3s;
         &:hover {
           background-color: $color-accent-light;
         }
       }
       &:nth-child(3) {
-        min-width: 20rem;
+        min-width: 18rem;
         transition: all 0.3s;
         &:hover {
           background-color: $color-accent-light;
         }
       }
       &:nth-child(4) {
-        min-width: 10rem;
+        min-width: 18rem;
         transition: all 0.3s;
         &:hover {
           background-color: $color-accent-light;
@@ -47,9 +51,9 @@
   }
 
   tbody {
-    font-size: 2rem;
+    font-size: $default-text-size;
     tr {
-      height: 8rem;
+      height: 6rem;
     }
 
     td {

@@ -1,10 +1,10 @@
-import Button from "../Button/Button";
 import classes from "./Search.module.scss";
 ///
 import { useState } from "react";
 import { useEffect } from "react";
 ///
 import coinData from "../../../models/coinData";
+import { ReactComponent as Logo } from "../../../assets/search.svg";
 
 type ChildProps = {
   onSearch: (str: string) => void;
@@ -62,14 +62,13 @@ const Search: React.FC<ChildProps> = ({
   return (
     <div className={classes.searchEl}>
       <div className={`${classes.searchField}`}>
-        <span>Img</span>
+        <Logo className={classes.searchLogo} />
         <input
           onChange={onChangeHandler}
           type="text"
           placeholder="Search by Name..."
         />
       </div>
-      <Button className={classes.searchBtn}>Find</Button>
     </div>
   );
 };

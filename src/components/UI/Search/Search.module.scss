@@ -1,18 +1,23 @@
 @import "../../../Styles/Variables.scss";
 
 .searchEl {
-  margin-top: 13rem;
-  margin-bottom: 2rem;
+  margin-top: 8rem;
+  margin-bottom: 2.5rem;
   display: flex;
   align-items: center;
   gap: 1.5rem;
 }
-
+.searchLogo {
+  width: 2.5rem;
+  height: 2.5rem;
+  stroke: $color-grey-light;
+  background-color: transparent;
+}
 .searchField {
   display: flex;
   gap: 1rem;
   align-items: center;
-  border: 1px solid $color-grey-light;
+  border: 1px solid $color-accent-medium;
   border-radius: 3px;
   max-width: 25rem;
   background-color: $color-accent-light;
@@ -23,16 +28,47 @@
     border: none;
     background-color: transparent;
     padding: 0.5rem;
+    font-style: inherit;
+    font-size: 1.2rem;
+    font-weight: 600;
 
     &:focus {
       border: none;
       outline: $color-accent-light;
     }
+    &::-webkit-input-placeholder {
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
+    &::-moz-placeholder {
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
+    &:-moz-placeholder {
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
+    &:-ms-input-placeholder {
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
+    &:focus::-webkit-input-placeholder {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    &:focus::-moz-placeholder {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    &:focus:-moz-placeholder {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    &:focus:-ms-input-placeholder {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
   }
-}
-.searchBtn {
-  padding: 0.8rem 1.6rem;
-  border-radius: 3px;
 }
 .searchField.active {
   background-color: $color-white;

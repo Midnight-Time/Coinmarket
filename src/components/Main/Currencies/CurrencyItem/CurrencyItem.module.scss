@@ -3,20 +3,40 @@
 .tableRow {
   div {
     display: flex;
-    gap: 1rem;
     justify-content: center;
+  }
+  .nameGroup {
+    gap: 1rem;
+  }
+  &__symbol {
+    color: $color-grey-light;
+    font-weight: 300;
   }
   .btn {
     padding: 1rem 2rem;
     min-width: 30%;
     border-radius: 3px;
-  }
-}
-///
+    background-color: $color-accent;
+    transition: all 0.3s ease;
 
-.priceDown {
-  color: $color-red;
-}
-.priceUp {
-  color: $color-green;
+    &:hover {
+      background-color: $color-accent-medium;
+      color: $color-grey-dark;
+    }
+  }
+  .triangle {
+    width: 2rem;
+    height: 2rem;
+    align-self: flex-end;
+  }
+  .priceDown {
+    color: $color-red;
+    stroke: $color-red;
+    fill: $color-red;
+  }
+  .priceUp {
+    color: $color-green;
+    stroke: $color-green;
+    fill: $color-green;
+  }
 }
