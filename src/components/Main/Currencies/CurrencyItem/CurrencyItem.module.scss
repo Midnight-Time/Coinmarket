@@ -23,6 +23,10 @@
       background-color: $color-accent-medium;
       color: $color-grey-dark;
     }
+    @media only screen and (max-width: $bp-small) {
+      padding: 0.5rem 1rem;
+      font-size: 1.3rem;
+    }
   }
   .triangle {
     width: 2rem;

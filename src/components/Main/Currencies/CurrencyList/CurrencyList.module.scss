@@ -19,15 +19,31 @@
     font-size: calc($default-text-size + 0.2rem);
     color: $color-black;
 
+    @media only screen and (max-width: $bp-small) {
+      font-size: calc($default-text-size - 0.3rem);
+    }
+
     th {
       &:nth-child(1) {
         min-width: 25rem;
+        @media only screen and (max-width: $bp-small) {
+          min-width: 15rem;
+        }
+        @media only screen and (max-width: $bp-smallest) {
+          min-width: 10rem;
+        }
       }
       &:nth-child(2) {
         min-width: 18rem;
         transition: all 0.3s;
         &:hover {
           background-color: $color-accent-light;
+        }
+        @media only screen and (max-width: $bp-small) {
+          min-width: 13rem;
+        }
+        @media only screen and (max-width: $bp-smallest) {
+          min-width: 10rem;
         }
       }
       &:nth-child(3) {
@@ -36,12 +52,24 @@
         &:hover {
           background-color: $color-accent-light;
         }
+        @media only screen and (max-width: $bp-small) {
+          min-width: 13rem;
+        }
+        @media only screen and (max-width: $bp-smallest) {
+          min-width: 10rem;
+        }
       }
       &:nth-child(4) {
         min-width: 18rem;
         transition: all 0.3s;
         &:hover {
           background-color: $color-accent-light;
+        }
+        @media only screen and (max-width: $bp-small) {
+          min-width: 13rem;
+        }
+        @media only screen and (max-width: $bp-smallest) {
+          min-width: 10rem;
         }
       }
       &:nth-child(5) {

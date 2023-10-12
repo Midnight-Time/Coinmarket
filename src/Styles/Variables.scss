@@ -17,3 +17,9 @@ $default-text-size: 1.4rem;
 
 // BOX SHADOW
 $shadow-light: 0 0.5rem 1rem rgba($color-black, 0.1);
+
+// MEDIA QUERIES
+$bp-large: 75em; //1200
+$bp-medium: 62.5em; //1000
+$bp-small: 50em; //800
+$bp-smallest: 32em; //512

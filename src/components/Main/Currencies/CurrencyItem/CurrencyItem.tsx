@@ -1,14 +1,27 @@
 import classes from "./CurrencyItem.module.scss";
 ///
 import Button from "../../../UI/Button/Button";
-///
-import React from "react";
-import coinData from "../../../../models/coinData";
 import { ReactComponent as TriangleDown } from "../../../../assets/triangle-down.svg";
 import { ReactComponent as TriangleUp } from "../../../../assets/triangle-up.svg";
 ///
+import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
+///
+import coinData from "../../../../models/coinData";
 
 const CurrencyItem: React.FC<{ item: coinData }> = (props) => {
+  const [width, setWidth] = useState(window.innerWidth);
+  const breakpoint = 700;
+  useEffect(() => {
+    const resizeWindowHandler = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", resizeWindowHandler);
+    // return () => {
+    //   window.removeEventListener("resize", resizeWindowHandler);
+    // };
+  });
+  console.log(width);
+
   const formatPrice = (num: number) => {
     if (Math.abs(num) < 0.0) {
       return "no data";
@@ -32,12 +45,32 @@ const CurrencyItem: React.FC<{ item: coinData }> = (props) => {
   const formatMarketCap = (num: number) => {
     if (Math.abs(num) < 0.0) {
       return "no data";
+    }
+    if (width < breakpoint) {
+      const convertNum = num / 1000_000_000;
+      return convertNum.toFixed(2) + "B";
     } else {
       const cutDecimals = Math.round(num);
       const convertNum = new Intl.NumberFormat("en-EN").format(cutDecimals);
       return convertNum;
     }
   };
+  /*
+  // условный рендер мобильной навигации
+  const [width, setWidth] = useState(window.innerWidth);
+  const breakpoint = 480;
+  useEffect(() => {
+    const resizeWindowHandler = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", resizeWindowHandler);
+    return () => {
+      window.removeEventListener("resize", resizeWindowHandler);
+    };
+  }, []);
+  let navigationToRender = <MainNavigation />;
+  if (width < breakpoint) {
+    navigationToRender = <MobileNav />;
+  }
+*/
 
   return (
     <tr className={classes.tableRow}>
