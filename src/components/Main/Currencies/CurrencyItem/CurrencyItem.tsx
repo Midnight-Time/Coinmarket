@@ -11,41 +11,32 @@ import { useEffect } from "react";
 import coinData from "../../../../models/coinData";
 
 const CurrencyItem: React.FC<{ item: coinData }> = (props) => {
+  // *TODO*
+  // Move up or manage as state to avoid unnessesary calculations on each item
   const [width, setWidth] = useState(window.innerWidth);
   const breakpoint = 700;
   useEffect(() => {
     const resizeWindowHandler = () => setWidth(window.innerWidth);
     window.addEventListener("resize", resizeWindowHandler);
+    //
     // return () => {
     //   window.removeEventListener("resize", resizeWindowHandler);
     // };
   });
-  console.log(width);
 
   const formatPrice = (num: number) => {
-    if (Math.abs(num) < 0.0) {
-      return "no data";
-    } else {
-      const convertNum = new Intl.NumberFormat("en-EN", {
-        style: "currency",
-        currency: "USD",
-      }).format(Number(num));
-      return convertNum;
-    }
+    const convertNum = new Intl.NumberFormat("en-EN", {
+      style: "currency",
+      currency: "USD",
+    }).format(Number(num));
+    return convertNum;
   };
 
   const formatProcent = (num: number) => {
-    if (Math.abs(num) < 0.0) {
-      return "no data";
-    } else {
-      return num.toFixed(2);
-    }
+    return (Math.round(num * 100) / 100).toFixed(2);
   };
 
   const formatMarketCap = (num: number) => {
-    if (Math.abs(num) < 0.0) {
-      return "no data";
-    }
     if (width < breakpoint) {
       const convertNum = num / 1000_000_000;
       return convertNum.toFixed(2) + "B";
@@ -55,27 +46,16 @@ const CurrencyItem: React.FC<{ item: coinData }> = (props) => {
       return convertNum;
     }
   };
-  /*
-  // условный рендер мобильной навигации
-  const [width, setWidth] = useState(window.innerWidth);
-  const breakpoint = 480;
-  useEffect(() => {
-    const resizeWindowHandler = () => setWidth(window.innerWidth);
-    window.addEventListener("resize", resizeWindowHandler);
-    return () => {
-      window.removeEventListener("resize", resizeWindowHandler);
-    };
-  }, []);
-  let navigationToRender = <MainNavigation />;
-  if (width < breakpoint) {
-    navigationToRender = <MobileNav />;
-  }
-*/
 
   return (
     <tr className={classes.tableRow}>
       <th>
         <div className={classes.nameGroup}>
+          <img
+            className={classes.currencyImage}
+            src={`https://assets.coincap.io/assets/icons/${props.item.symbol.toLocaleLowerCase()}@2x.png`}
+            alt={props.item.id}
+          ></img>
           <span>{props.item.id}</span>
           <span className={classes.tableRow__symbol}>{props.item.symbol}</span>
         </div>

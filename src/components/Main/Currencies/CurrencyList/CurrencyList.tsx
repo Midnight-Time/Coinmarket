@@ -2,7 +2,7 @@ import classes from "./CurrencyList.module.scss";
 ///
 import CurrencyItem from "../CurrencyItem/CurrencyItem";
 ///
-import React, { MouseEventHandler } from "react";
+import React from "react";
 import { useState } from "react";
 ///
 import coinData from "../../../../models/coinData";
@@ -50,35 +50,19 @@ const CurrencyList: React.FC<{ items: coinData[] }> = (props) => {
       reverse: sortOrder === "des",
     });
 
-  function SortButton({
-    sortOrder,
-    columnKey,
-    sortKey,
-    onClick,
-  }: {
-    sortOrder: SortOrder;
-    columnKey: SortKeys;
-    sortKey: SortKeys;
-    onClick: MouseEventHandler<HTMLButtonElement>;
-  }) {
-    return (
-      <button
-        onClick={onClick}
-        className={`${
-          sortKey === columnKey && sortOrder === "des"
-            ? classes.sortBtnReversed
-            : classes.sortBtn
-        }`}
-      >
-        &#9650;
-      </button>
-    );
-  }
-
   function changeSort(key: SortKeys) {
-    setSortOrder(sortOrder === "asc" ? "des" : "asc");
+    if (key === sortKey) {
+      setSortOrder(sortOrder === "asc" ? "des" : "asc");
+    }
     setSortKey(key);
   }
+
+  const ArrowDown = () => {
+    return <span>&#9660;</span>;
+  };
+  const ArrowUp = () => {
+    return <span>&#9650;</span>;
+  };
 
   return (
     <>
@@ -88,13 +72,10 @@ const CurrencyList: React.FC<{ items: coinData[] }> = (props) => {
             <th>Name</th>
             {headers.map((row) => {
               return (
-                <th key={row.key}>
+                <th key={row.key} onClick={() => changeSort(row.key)}>
                   {row.label}
-                  <SortButton
-                    columnKey={row.key}
-                    onClick={() => changeSort(row.key)}
-                    {...{ sortOrder, sortKey }}
-                  />
+                  {row.key === sortKey && sortOrder === "asc" && <ArrowDown />}
+                  {row.key === sortKey && sortOrder === "des" && <ArrowUp />}
                 </th>
               );
             })}

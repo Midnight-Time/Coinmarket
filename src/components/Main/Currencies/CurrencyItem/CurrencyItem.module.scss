@@ -6,7 +6,15 @@
     justify-content: center;
   }
   .nameGroup {
+    display: flex;
+    align-items: center;
     gap: 1rem;
+    justify-content: left;
+    margin-left: 20%;
+  }
+  .currencyImage {
+    width: 3rem;
+    height: 3rem;
   }
   &__symbol {
     color: $color-grey-light;

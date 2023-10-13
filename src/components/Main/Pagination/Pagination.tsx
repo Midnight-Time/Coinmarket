@@ -40,11 +40,20 @@ const Pagination: React.FC<ChildProps> = ({
       <Button className={classes.btnPaging} onClick={prevClickHandler}>
         <span>&larr;</span>Prev
       </Button>
-      <span onClick={showNumberHandler}>{page === 0 ? "..." : page}</span>
-      <span onClick={showNumberHandler} className={classes.pageActive}>
-        {page === 0 ? "1" : page + 1}{" "}
-      </span>
-      <span onClick={showNumberHandler}>{page === 0 ? "2" : page + 2}</span>
+      <div className={classes.paginationBtns}>
+        <button onClick={showNumberHandler} className={classes.pageNum}>
+          {page === 0 ? "..." : page}
+        </button>
+        <button
+          onClick={showNumberHandler}
+          className={`${classes.pageNum} ${classes.pageActive}`}
+        >
+          <span>{page === 0 ? "1" : page + 1} </span>
+        </button>
+        <button onClick={showNumberHandler} className={classes.pageNum}>
+          {page === 0 ? "2" : page + 2}
+        </button>
+      </div>
       <Button className={classes.btnPaging} onClick={nextClickHandler}>
         Next<span>&rarr;</span>
       </Button>

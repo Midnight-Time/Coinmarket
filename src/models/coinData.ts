@@ -5,7 +5,7 @@ class coinData {
   changePercent24Hr: number;
   marketCapUsd: number;
   symbol: string;
-  rank: string;
+  rank: number;
 
   constructor(
     coinName: string,
@@ -14,7 +14,7 @@ class coinData {
     percent: number,
     marketCap: number,
     symbol: string,
-    rank: string
+    rank: number
   ) {
     this.id = coinId;
     this.name = coinName;
@@ -22,7 +22,7 @@ class coinData {
     this.changePercent24Hr = Number(percent);
     this.marketCapUsd = Number(marketCap);
     this.symbol = symbol;
-    this.rank = rank;
+    this.rank = Number(rank);
   }
 }
 export default coinData;
