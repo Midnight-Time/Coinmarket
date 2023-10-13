@@ -12,7 +12,7 @@ type ChildProps = {
 const Pagination: React.FC<ChildProps> = ({
   onClickNext = () => {},
   onClickPrev = () => {},
-  onClickPage = (num) => {},
+  onClickPage = () => {},
   page,
 }) => {
   const nextClickHandler = () => {

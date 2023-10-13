@@ -66,7 +66,9 @@ const MainLayout = () => {
   const reseiveSearchText = (search: string) => {
     setSearchText(search);
   };
-  console.log(searchText);
+
+  let showError =
+    searchText.length > 0 && filteredResults.length === 0 ? true : false;
 
   return (
     <>
@@ -81,18 +83,19 @@ const MainLayout = () => {
         />
         {searchText === "" && <CurrencyList items={coinsData} />}
         {filteredResults[0] && <CurrencyList items={filteredResults} />}
-        {/* {filteredResults[0] ? (
-          <CurrencyList items={filteredResults} />
-        ) : (
-          <CurrencyList items={coinsData} />
-        )} */}
-
-        <Pagination
-          onClickNext={moveNext}
-          onClickPrev={movePrev}
-          onClickPage={moveTo}
-          page={currentPage}
-        />
+        {showError && (
+          <span className={classes.wrongSearch}>
+            Please wait or start another search...
+          </span>
+        )}
+        {!showError && (
+          <Pagination
+            onClickNext={moveNext}
+            onClickPrev={movePrev}
+            onClickPage={moveTo}
+            page={currentPage}
+          />
+        )}
       </main>
     </>
   );

@@ -13,7 +13,7 @@ const Search: React.FC<{
   const [search, setSearch] = useState<string>("");
 
   const fetchSeachResults = async () => {
-    const res = await fetch(`https://api.coincap.io/v2/assets`);
+    const res = await fetch(`https://api.coincap.io/v2/assets?limit=1000`);
     const data = await res.json();
 
     const coinsData = data.data.map(

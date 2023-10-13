@@ -24,39 +24,54 @@ const CurrencyItem: React.FC<{ item: coinData }> = (props) => {
     // };
   });
 
+  const chechIfNull = (num: number) => {
+    return Math.round(num * 100) / 100;
+  };
+
   const formatPrice = (num: number) => {
-    const convertNum = new Intl.NumberFormat("en-EN", {
-      style: "currency",
-      currency: "USD",
-    }).format(Number(num));
-    return convertNum;
+    return chechIfNull(num) === 0
+      ? `< 0.00`
+      : new Intl.NumberFormat("en-EN", {
+          style: "currency",
+          currency: "USD",
+        }).format(Number(num));
   };
 
   const formatProcent = (num: number) => {
-    return (Math.round(num * 100) / 100).toFixed(2);
+    return chechIfNull(num) === 0 ? `< 0.00` : num.toFixed(2);
   };
 
   const formatMarketCap = (num: number) => {
+    if (chechIfNull(num) === 0) return `< 0.00`;
     if (width < breakpoint) {
       const convertNum = num / 1000_000_000;
+      if (chechIfNull(num) === 0) return `0.01`;
       return convertNum.toFixed(2) + "B";
     } else {
       const cutDecimals = Math.round(num);
       const convertNum = new Intl.NumberFormat("en-EN").format(cutDecimals);
-      return convertNum;
+      return "$" + convertNum;
     }
+  };
+
+  const imageFallback = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    e.currentTarget.src =
+      "https://delovede.ru/wp-content/uploads/2020/09/noimg-416x416.png";
   };
 
   return (
     <tr className={classes.tableRow}>
       <th>
         <div className={classes.nameGroup}>
-          <img
-            className={classes.currencyImage}
-            src={`https://assets.coincap.io/assets/icons/${props.item.symbol.toLocaleLowerCase()}@2x.png`}
-            alt={props.item.id}
-          ></img>
-          <span>{props.item.id}</span>
+          <div className={classes.nameGroup__container}>
+            <img
+              className={classes.currencyImage}
+              src={`https://assets.coincap.io/assets/icons/${props.item.symbol.toLocaleLowerCase()}@2x.png`}
+              onError={imageFallback}
+              alt={props.item.id}
+            ></img>
+            <span>{props.item.id}</span>
+          </div>
           <span className={classes.tableRow__symbol}>{props.item.symbol}</span>
         </div>
       </th>
@@ -81,7 +96,7 @@ const CurrencyItem: React.FC<{ item: coinData }> = (props) => {
         </div>
       </td>
       <td>
-        <div>${formatMarketCap(props.item.marketCapUsd)}</div>
+        <div>{formatMarketCap(props.item.marketCapUsd)}</div>
       </td>
       <td>
         <div>

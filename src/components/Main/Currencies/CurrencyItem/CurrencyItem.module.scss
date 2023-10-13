@@ -11,6 +11,16 @@
     gap: 1rem;
     justify-content: left;
     margin-left: 20%;
+
+    @media only screen and (max-width: $bp-small) {
+      margin-left: 5%;
+    }
+
+    &__container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
   }
   .currencyImage {
     width: 3rem;
@@ -19,6 +29,10 @@
   &__symbol {
     color: $color-grey-light;
     font-weight: 300;
+
+    @media only screen and (max-width: $bp-smallest) {
+      display: none;
+    }
   }
   .btn {
     padding: 1rem 2rem;
