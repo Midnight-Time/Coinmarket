@@ -6,57 +6,48 @@ import { useEffect } from "react";
 import coinData from "../../../models/coinData";
 import { ReactComponent as Logo } from "../../../assets/search.svg";
 
-type ChildProps = {
-  onSearch: (str: string) => void;
+const Search: React.FC<{
   onFilterSearch: (filteredData: coinData[]) => void;
-  searchResults: string;
-};
+  onGetSearchResults: (search: string) => void;
+}> = ({ onFilterSearch = () => {}, onGetSearchResults = () => {} }) => {
+  const [search, setSearch] = useState<string>("");
 
-let isInitial = true;
+  const fetchSeachResults = async () => {
+    const res = await fetch(`https://api.coincap.io/v2/assets`);
+    const data = await res.json();
 
-const Search: React.FC<ChildProps> = ({
-  onSearch = () => {},
-  onFilterSearch = () => {},
-  searchResults,
-}) => {
-  const [coins, setCoins] = useState<coinData[]>([]);
+    const coinsData = data.data.map(
+      (coin: coinData) =>
+        new coinData(
+          coin.id,
+          coin.name,
+          coin.priceUsd,
+          coin.changePercent24Hr,
+          coin.marketCapUsd,
+          coin.symbol,
+          coin.rank
+        )
+    );
+
+    const filteredData = coinsData.filter((item: coinData) => {
+      return (
+        search &&
+        item &&
+        item.id &&
+        item.id.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+      );
+    });
+    onFilterSearch(filteredData);
+  };
 
   useEffect(() => {
-    if (isInitial) {
-      isInitial = false;
-      return;
-    }
-    if (searchResults) {
-      const fetchCoins = async () => {
-        const res = await fetch(`https://api.coincap.io/v2/assets`);
-        const data = await res.json();
-        setCoins(data.data);
-      };
-      fetchCoins();
-    }
-  }, [searchResults]);
-
-  const coinsData = coins.map(
-    (coin: coinData) =>
-      new coinData(
-        coin.id,
-        coin.name,
-        coin.priceUsd,
-        coin.changePercent24Hr,
-        coin.marketCapUsd,
-        coin.symbol,
-        coin.rank
-      )
-  );
-  const filteredData = coinsData.filter((item) => {
-    return searchResults.toLocaleLowerCase() === ""
-      ? item
-      : item.id.toLocaleLowerCase().includes(searchResults);
-  });
+    fetchSeachResults();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search]);
 
   const onChangeHandler = (e: React.FormEvent<HTMLInputElement>) => {
-    onSearch(e.currentTarget.value);
-    onFilterSearch(filteredData);
+    setSearch(e.currentTarget.value);
+    onGetSearchResults(e.currentTarget.value);
   };
 
   return (

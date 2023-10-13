@@ -16,8 +16,8 @@ let isInitial = true;
 const MainLayout = () => {
   const [coins, setCoins] = useState<coinData[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(0);
-  const [search, setSearch] = useState<string>("");
-  const [searchResults, setSearchResults] = useState<coinData[]>([]);
+  const [filteredResults, setFilteredResults] = useState<coinData[]>([]);
+  const [searchText, setSearchText] = useState<string>("");
 
   const moveNext = () => {
     setCurrentPage((prevPage) => prevPage + 1);
@@ -44,7 +44,6 @@ const MainLayout = () => {
       );
       const data = await res.json();
       setCoins(data.data);
-      console.log(data.data);
     };
     fetchCoins();
   }, [offset]);
@@ -61,13 +60,13 @@ const MainLayout = () => {
         coin.rank
       )
   );
-
-  const setSearchData = (str: string) => {
-    setSearch(str);
-  };
   const reseiveSearchResults = (filteredData: coinData[]) => {
-    setSearchResults(filteredData);
+    setFilteredResults(filteredData);
   };
+  const reseiveSearchText = (search: string) => {
+    setSearchText(search);
+  };
+  console.log(searchText);
 
   return (
     <>
@@ -77,15 +76,17 @@ const MainLayout = () => {
           {/* <CartPreview /> */}
         </div>
         <Search
-          onSearch={setSearchData}
-          searchResults={search}
           onFilterSearch={reseiveSearchResults}
+          onGetSearchResults={reseiveSearchText}
         />
-        {search ? (
-          <CurrencyList items={searchResults} />
+        {searchText === "" && <CurrencyList items={coinsData} />}
+        {filteredResults[0] && <CurrencyList items={filteredResults} />}
+        {/* {filteredResults[0] ? (
+          <CurrencyList items={filteredResults} />
         ) : (
           <CurrencyList items={coinsData} />
-        )}
+        )} */}
+
         <Pagination
           onClickNext={moveNext}
           onClickPrev={movePrev}
