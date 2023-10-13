@@ -1,11 +1,13 @@
 // import Header from "../components/Header/Header";
 import MainLayout from "../components/Main/MainLayout/MainLayout";
+///
+import coinData from "../models/coinData";
 
-const HomePage = () => {
+const HomePage: React.FC<{ coins: coinData[] }> = (props) => {
   return (
     <>
       {/* <Header /> */}
-      <MainLayout />
+      <MainLayout coins={props.coins} />
     </>
   );
 };

@@ -11,10 +11,10 @@ import coinData from "../../../models/coinData";
 import { useEffect } from "react";
 import { useState } from "react";
 
-let isInitial = true;
+// let isInitial = true;
 
-const MainLayout = () => {
-  const [coins, setCoins] = useState<coinData[]>([]);
+const MainLayout: React.FC<{ coins: coinData[] }> = (props) => {
+  const [coins, setCoins] = useState<coinData[]>(props.coins);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [filteredResults, setFilteredResults] = useState<coinData[]>([]);
   const [searchText, setSearchText] = useState<string>("");
@@ -34,10 +34,11 @@ const MainLayout = () => {
   let offset = currentPage * 10;
 
   useEffect(() => {
-    if (isInitial) {
-      isInitial = false;
-      return;
-    }
+    // if (isInitial) {
+    //   isInitial = false;
+    //   return;
+    // }
+
     const fetchCoins = async () => {
       const res = await fetch(
         `https://api.coincap.io/v2/assets?limit=10&offset=${offset}`
@@ -60,6 +61,7 @@ const MainLayout = () => {
         coin.rank
       )
   );
+  console.log(props.coins);
   const reseiveSearchResults = (filteredData: coinData[]) => {
     setFilteredResults(filteredData);
   };
