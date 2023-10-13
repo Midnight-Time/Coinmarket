@@ -1,5 +1,4 @@
 @import "../../../../Styles/Variables.scss";
-// dfdfdf
 
 .table {
   grid-column: center-start / center-end;
@@ -7,7 +6,8 @@
   border-top: 1px solid $color-accent-light;
   border-bottom: 1px solid $color-accent-light;
   cursor: pointer;
-  margin: 0 1rem;
+  margin: 0 1rem 6rem;
+  padding-bottom: 6rem;
 
   td,
   th {

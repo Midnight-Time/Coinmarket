@@ -94,6 +94,7 @@ const MainLayout = () => {
             onClickPrev={movePrev}
             onClickPage={moveTo}
             page={currentPage}
+            filterResults={filteredResults}
           />
         )}
       </main>

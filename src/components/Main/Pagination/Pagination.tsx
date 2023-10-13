@@ -1,12 +1,15 @@
 import classes from "./Pagintaion.module.scss";
 import Button from "../../UI/Button/Button";
 ///
+import coinData from "../../../models/coinData";
+///
 
 type ChildProps = {
   onClickNext: () => void;
   onClickPrev: () => void;
   onClickPage: (num: number) => void;
   page: number;
+  filterResults: coinData[];
 };
 
 const Pagination: React.FC<ChildProps> = ({
@@ -14,6 +17,7 @@ const Pagination: React.FC<ChildProps> = ({
   onClickPrev = () => {},
   onClickPage = () => {},
   page,
+  filterResults,
 }) => {
   const nextClickHandler = () => {
     onClickNext();
@@ -35,28 +39,34 @@ const Pagination: React.FC<ChildProps> = ({
     moveToHandler(showPageNum - 1);
   };
 
+  let hidePage = filterResults[0] ? false : true;
+
   return (
     <div className={classes.pagination}>
-      <Button className={classes.btnPaging} onClick={prevClickHandler}>
-        <span>&larr;</span>Prev
-      </Button>
-      <div className={classes.paginationBtns}>
-        <button onClick={showNumberHandler} className={classes.pageNum}>
-          {page === 0 ? "..." : page}
-        </button>
-        <button
-          onClick={showNumberHandler}
-          className={`${classes.pageNum} ${classes.pageActive}`}
-        >
-          <span>{page === 0 ? "1" : page + 1} </span>
-        </button>
-        <button onClick={showNumberHandler} className={classes.pageNum}>
-          {page === 0 ? "2" : page + 2}
-        </button>
-      </div>
-      <Button className={classes.btnPaging} onClick={nextClickHandler}>
-        Next<span>&rarr;</span>
-      </Button>
+      {hidePage && (
+        <>
+          <Button className={classes.btnPaging} onClick={prevClickHandler}>
+            <span>&larr;</span>Prev
+          </Button>
+          <div className={classes.paginationBtns}>
+            <button onClick={showNumberHandler} className={classes.pageNum}>
+              {page === 0 ? "..." : page}
+            </button>
+            <button
+              onClick={showNumberHandler}
+              className={`${classes.pageNum} ${classes.pageActive}`}
+            >
+              <span>{page === 0 ? "1" : page + 1} </span>
+            </button>
+            <button onClick={showNumberHandler} className={classes.pageNum}>
+              {page === 0 ? "2" : page + 2}
+            </button>
+          </div>
+          <Button className={classes.btnPaging} onClick={nextClickHandler}>
+            Next<span>&rarr;</span>
+          </Button>
+        </>
+      )}
     </div>
   );
 };
